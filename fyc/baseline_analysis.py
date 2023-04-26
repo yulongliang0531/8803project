@@ -82,7 +82,12 @@ if __name__ == "__main__":
 
     #  Plot the force balance error after solve
     dplot.plot_surfaces(eq=eq, ax=axs[0][1])
-    dplot.plot_section(eq=eq, name="|F|", norm_F=True, log=True, ax=axs[1][1])
+    _, _, plot_data = dplot.plot_section(
+        eq=eq, name="|F|", norm_F=False, return_data=True
+    )
+    print("max |F|: %.5f" % plot_data["|F|"].max())
+    plt.show()
+    exit()
 
     # Now we perturb the pressure profile by a bit and rerun simulation
     delta_p = np.zeros_like(eq.p_l)
